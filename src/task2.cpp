@@ -396,12 +396,23 @@ ListGraph& ListGraph::operator=(MatrixGraph &oth) {
 };
 
 void task2() {
-    MatrixGraph g1;
+    /*MatrixGraph g1;
     ListGraph g2 = g1;
     g1.GraphOutput();
     std::cout<< std::endl;
     g2.GraphOutput();
     g1 = g2;
     std::cout<< std::endl;
+    g1.GraphOutput();*/
+    MatrixGraph g1;
+    g1.AddEdge("1", "2");
+    g1.AddEdge("1", "4");
+    g1.AddEdge("1", "2");
+    g1.AddEdge("100", "100");
+    g1.AddEdge("100", "100");
+    g1.AddEdge("-1", "1");
+    ListGraph g2 = g1;
     g1.GraphOutput();
+    std::cout<< std::endl;
+    g2.GraphOutput();
 }
