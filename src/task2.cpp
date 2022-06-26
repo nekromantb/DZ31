@@ -169,15 +169,15 @@ public:
         Add_Graph_from_input(this, counter);
     };
 
-    ListGraph(ListGraph *oth) {
+    ListGraph(ListGraph &oth) {
         if (!graph.empty()){
             graph.clear();
             vertices_names.clear();
             vertices_names_out.clear();
         }
-        vertices_names = oth->get_map();
-        vertices_names_out = oth->get_map_inv();
-        graph = oth->get_graph();
+        vertices_names = oth.get_map();
+        vertices_names_out = oth.get_map_inv();
+        graph = oth.get_graph();
     };
 
     ListGraph& operator= (const ListGraph& oth) {
@@ -310,18 +310,18 @@ public:
         Add_Graph_from_input(this, counter);
     };
 
-    MatrixGraph(MatrixGraph *oth) {
+    MatrixGraph(MatrixGraph &oth) {
         if (!graph.empty()){
             graph.clear();
             vertices_names.clear();
             vertices_names_out.clear();
         }
-        vertices_names = oth->get_map();
-        vertices_names_out = oth->get_map_inv();
-        graph = oth->get_graph();
+        vertices_names = oth.get_map();
+        vertices_names_out = oth.get_map_inv();
+        graph = oth.get_graph();
     };
 
-    MatrixGraph(ListGraph *oth) {
+    MatrixGraph(ListGraph &oth) {
         if (!graph.empty()) {
             graph.clear();
             vertices_names.clear();
@@ -399,5 +399,9 @@ void task2() {
     MatrixGraph g1;
     ListGraph g2 = g1;
     g1.GraphOutput();
+    std::cout<< std::endl;
     g2.GraphOutput();
+    g1 = g2;
+    std::cout<< std::endl;
+    g1.GraphOutput();
 }
