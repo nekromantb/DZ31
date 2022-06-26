@@ -327,10 +327,9 @@ public:
             vertices_names.clear();
             vertices_names_out.clear();
         }
-        vertices_names = oth->get_map();
-        vertices_names_out = oth->get_map_inv();
-        std::vector<std::unordered_set<std::string>> input_graph = oth->get_graph();
-        for (auto i : vertices_names)
+        auto vertices_names1 = oth.get_map();
+        std::vector<std::unordered_set<std::string>> input_graph = oth.get_graph();
+        for (auto i : vertices_names1)
             for (auto j : input_graph[i.second]){
                 AddEdge(i.first, j);
             }
@@ -338,9 +337,6 @@ public:
     };
 
     MatrixGraph& operator= (const MatrixGraph& oth) {
-        if (this == &oth)
-            return *this;
-
         if (!graph.empty()){
             graph.clear();
             vertices_names.clear();
@@ -359,10 +355,9 @@ public:
             vertices_names.clear();
             vertices_names_out.clear();
         }
-        vertices_names = oth.get_map();
-        vertices_names_out = oth.get_map_inv();
+        auto vertices_names1 = oth.get_map();
         std::vector<std::unordered_set<std::string>> input_graph = oth.get_graph();
-        for (auto i : vertices_names)
+        for (auto i : vertices_names1)
             for (auto j : input_graph[i.second]){
                 AddEdge(i.first, j);
             }
@@ -371,18 +366,17 @@ public:
 
 ListGraph::ListGraph(MatrixGraph &oth)
 {
-        if (!graph.empty()) {
+    if (!graph.empty()) {
         graph.clear();
         vertices_names.clear();
         vertices_names_out.clear();
         }
-    vertices_names = oth.get_map();
-    vertices_names_out = oth.get_map_inv();
+    auto vertices_names1 = oth.get_map();
     std::vector<std::vector<int>> input_graph = oth.get_graph();
-    for (auto i : vertices_names)
-        for (auto j : vertices_names)
+    for (auto i : vertices_names1)
+        for (auto j : vertices_names1)
             if (input_graph[j.second][i.second] == 1) {
-                AddEdge(j.first, i.first);
+                AddEdge(i.first, j.first);
             }
 };
 
@@ -392,19 +386,18 @@ ListGraph& ListGraph::operator=(MatrixGraph &oth) {
         vertices_names.clear();
         vertices_names_out.clear();
     }
-    vertices_names = oth.get_map();
-    vertices_names_out = oth.get_map_inv();
+    auto vertices_names1 = oth.get_map();
     std::vector<std::vector<int>> input_graph = oth.get_graph();
-    for (auto i : vertices_names)
-        for (auto j : vertices_names)
+    for (auto i : vertices_names1)
+        for (auto j : vertices_names1)
             if (input_graph[j.second][i.second] == 1) {
-                AddEdge(j.first, i.first);
+                AddEdge(i.first, j.first);
             }
 };
 
 void task2() {
     MatrixGraph g1;
-
-
     ListGraph g2 = g1;
+    g1.GraphOutput();
+    g2.GraphOutput();
 }
