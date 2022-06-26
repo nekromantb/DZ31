@@ -196,7 +196,7 @@ public:
     };
 
 
-    ListGraph(MatrixGraph *oth);
+    ListGraph(MatrixGraph &oth);
     ListGraph& operator= (MatrixGraph& oth);
 };
 
@@ -369,16 +369,16 @@ public:
     };
 };
 
-ListGraph::ListGraph(MatrixGraph *oth)
+ListGraph::ListGraph(MatrixGraph &oth)
 {
         if (!graph.empty()) {
         graph.clear();
         vertices_names.clear();
         vertices_names_out.clear();
         }
-    vertices_names = oth->get_map();
-    vertices_names_out = oth->get_map_inv();
-    std::vector<std::vector<int>> input_graph = oth->get_graph();
+    vertices_names = oth.get_map();
+    vertices_names_out = oth.get_map_inv();
+    std::vector<std::vector<int>> input_graph = oth.get_graph();
     for (auto i : vertices_names)
         for (auto j : vertices_names)
             if (input_graph[j.second][i.second] == 1) {
@@ -386,7 +386,7 @@ ListGraph::ListGraph(MatrixGraph *oth)
             }
 };
 
-ListGraph &ListGraph::operator=(MatrixGraph &oth) {
+ListGraph& ListGraph::operator=(MatrixGraph &oth) {
     if (!graph.empty()){
         graph.clear();
         vertices_names.clear();
@@ -403,7 +403,8 @@ ListGraph &ListGraph::operator=(MatrixGraph &oth) {
 };
 
 void task2() {
-    std::shared_ptr<IGraph> Graph1 = std::make_shared<ListGraph>(ListGraph());
-    //std::shared_ptr<IGraph> Graph2 = std::make_shared<MatrixGraph>(MatrixGraph(Graph1.get()));
-    Graph1->GraphOutput();
+    MatrixGraph g1;
+
+
+    ListGraph g2 = g1;
 }
